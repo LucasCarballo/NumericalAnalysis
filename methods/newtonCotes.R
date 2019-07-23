@@ -1,5 +1,9 @@
 install.packages("Deriv")
 require(Deriv)
+require(pracma)
+
+source('C:/projects/NumericalAnalysis/helpers/draw.R')
+source('C:/projects/NumericalAnalysis/methods/lagrange.R')
 
 trapezoid <- function(f, a, b) {
   h <- (b-a)
@@ -9,11 +13,13 @@ trapezoid <- function(f, a, b) {
   f2dx <- Deriv(f, 'x', nderiv = 2)
 
   error <- 1/12 * (h^3) * fminbnd(f2dx, a, b, maximum = TRUE)[[2]]
+
+  draw.trapezoid(f,0,1)
   
   c(t, error)
 }
 
-trapezoidCompound <- function(f, a, b, n) {
+trapezoid.compound <- function(f, a, b, n) {
   h <- (b-a)/n
   
   xi <- seq(a+h, b-h, by = h)
@@ -24,10 +30,12 @@ trapezoidCompound <- function(f, a, b, n) {
   
   error <- (b-a) * (h^2)/12 * fminbnd(f2dx, a, b, maximum = TRUE)[[2]]
   
+  draw.trapezoid(f, a, b, n)
+  
   c(t, error)
 }
 
-simpson13compound <- function(f, a, b, n) {
+simpson13.compound <- function(f, a, b, n) {
   if (n%%2 != 0) stop("En la regla de Simpson, n tiene que ser par")
   
   h <- (b-a)/n
@@ -35,7 +43,9 @@ simpson13compound <- function(f, a, b, n) {
   i1 <- seq(1, n-1, by = 2) # impares
   i2 <- seq(2, n-2, by = 2) # pares
   
-  s <- h/3 * ( f(a) + f(b) + 4*sum( f(a+i1*h) ) + 2*sum( f(a+i2*h) ) )
+  s <- h/3 * ( f(a) + f(b) + 4*sum( f(a+i1*h) ) + 2*sum( f(a+i2*h) ) ) 
+  
+  draw.simpson(f, a, b, n)
   
   f4dx <- Deriv(f, 'x', nderiv = 4)
   
@@ -53,10 +63,12 @@ simpson38 <- function(f, a, b) {
   
   error <- -3/80 * h^5 * fminbnd(f4dx, a, b, maximum = TRUE)[[2]]
   
+  draw.simpson(f, a, b)
+  
   c(s, error)
 }
 
-simpson38compound <- function(f, a, b, n) {
+simpson38.compound <- function(f, a, b, n) {
   if (n%%3 != 0) stop("En la regla de Simpson de 3/8 Compuesta, n tiene ser multiplo de 3")
   
   h <- (b-a)/n
@@ -71,8 +83,8 @@ simpson38compound <- function(f, a, b, n) {
   
   error <- n/80 * h^5 * fminbnd(f4dx, a, b, maximum = TRUE)[[2]]
   
-  plot(f)
-  plot(f4dx)
+  draw.simpson(f, a, b, n)
+  
   c(s, error)
 }
 
@@ -106,6 +118,6 @@ romberg <- function(f, a, b, n) {
   R
 }
 
-f = function(x) exp(x^2)
+f <- function(x) exp(x^2)
 
-
+g <- function(x) sin(x^2)
