@@ -5,7 +5,7 @@ require(pracma)
 source('C:/projects/NumericalAnalysis/helpers/draw.R')
 source('C:/projects/NumericalAnalysis/methods/lagrange.R')
 
-trapezoid <- function(f, a, b) {
+trapezoid <- function(f, a, b, plot = TRUE) {
   h <- (b-a)
   
   t <- h/2 * (f(a) + f(b))
@@ -14,7 +14,7 @@ trapezoid <- function(f, a, b) {
 
   error <- 1/12 * (h^3) * fminbnd(f2dx, a, b, maximum = TRUE)[[2]]
 
-  draw.trapezoid(f,0,1)
+  if (plot) draw.trapezoid(f,0,1)
   
   c(t, error)
 }
@@ -100,7 +100,7 @@ romberg <- function(f, a, b, n) {
     if (j == 1) 
       for(k in kArray) 
         if (k == 1) {
-          R[1, 1] <- trapezoid(f, a, b)
+          R[1, 1] <- trapezoid(f, a, b, FALSE)[[1]]
         } else {
           i <- seq(1, 2^(k-2), by = 1)
           R[k, 1] <- 1/2 * (R[k-1, 1] + hArray[k-1] * sum(f(a + (2*i-1)*hArray[k])))  
