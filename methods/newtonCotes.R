@@ -91,7 +91,7 @@ simpson38.compound <- function(f, a, b, n) {
 romberg <- function(f, a, b, n) {
   h <- (b-a)/n
   
-  kArray <- seq(1, n, by = 1)
+  kArray <- 1:n
   hArray <- (b-a)/(2^(kArray-1))
   
   R <- matrix(data = NA, nrow = n, ncol = n, byrow = FALSE, dimnames = NULL)
@@ -115,7 +115,12 @@ romberg <- function(f, a, b, n) {
       }
   }
   
-  R
+  errors <- R[n, ][2:n] - R[n, ][1:(n-1)]
+  
+  draw.integrate(f, a, b)
+  
+  print(R)
+  c(R[n,n], min(errors))
 }
 
 f <- function(x) exp(x^2)

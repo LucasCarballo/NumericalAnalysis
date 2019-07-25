@@ -34,4 +34,15 @@ draw.simpson <- function(f, a, b, n = 1) {
   
   curve(f, a, b, n = 101, add = TRUE, type = "l", col = "green", lwd = "2")
   curve(L, a, b, n = 101, add = TRUE, type = "l", col = "red", lwd = "2")
-}  
+}
+
+draw.integrate <- function(f, a, b) {
+  n <- 101
+  x <- seq(a, b, by = (b-a)/n)
+  
+  plot(1, type = "n", xlab = "x", ylab = "y", xlim = c(a-0.5, b+0.5), ylim = c(0, trunc(f(b))+1))  
+  
+  polygon(c(min(x), x, max(x)), c(0, f(x), 0), col = "#1b98e0")
+  
+  curve(f, a, b, n = 101, add = TRUE, type = "l", col = "red", lwd = "2")
+}
