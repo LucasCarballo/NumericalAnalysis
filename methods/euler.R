@@ -21,5 +21,3 @@ euler <- function(f, a, b, n, y0) {
   
   result
 }
-
-func <- function(t, y) 0.7 * y - t^2 + 1

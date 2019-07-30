@@ -16,11 +16,12 @@ legendreCoeficients <- function(n) {
 }
 
 gaussianQuadrature <- function(f, a, b, n) {
+  print("Aplicando metodo de la Cuadratura de Gauss")
   lCoeficients <- legendreCoeficients(n)
 
   f2ndx <- Deriv(f, 'x', nderiv = (2*n))
   
-  error <- (((b-a)^(2*n+1) * fact(n)^4)/((2*n+1)*((fact(2*n)^3)))) * fminbnd(f2ndx, a, b, maximum = TRUE)[[2]]  
+  error <- (((b-a)^(2*n+1) * factorial(n)^4)/((2*n+1)*((factorial(2*n)^3)))) * fminbnd(f2ndx, a, b, maximum = TRUE)[[2]]  
   
   g <- (b-a)/2 * sum(lCoeficients[1:n, 2] * f(((b-a) * lCoeficients[1:n, 1] + b + a)/2))
   

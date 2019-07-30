@@ -1,0 +1,9 @@
+Package: numericalAnalysis
+Version: 0.1
+Date: 2019-07-29
+Title: Numerical Analysis
+Author: Lucas Carballo
+Maintainer: Lucas Carballo <lucas.d.carballo@gmail.com>
+Depends: Deriv, pracma, orthopolynom
+Description: Methods to solve Integrals and Ordinary Differential Equations
+License: MIT + file LICENSE

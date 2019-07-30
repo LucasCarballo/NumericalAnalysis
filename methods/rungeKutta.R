@@ -15,6 +15,8 @@ rungeKutta <- function(f, a, b, y0, n) {
     y[i] <- y[i-1] + 1/3 * (k1 + 2 * k2 + 2 * k3 + k4)
   }
   
+  plot(t, y, type="b")
+  
   dat = cbind(t,y)
   dat
 }

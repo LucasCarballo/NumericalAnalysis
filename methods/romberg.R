@@ -2,6 +2,8 @@ source('C:/projects/NumericalAnalysis/helpers/draw.R')
 source('C:/projects/NumericalAnalysis/methods/newtonCotes.R')
 
 romberg <- function(f, a, b, n) {
+  print("Aplicando metodo de Romberg")
+  
   h <- (b-a)/n
   
   kArray <- 1:n
@@ -13,7 +15,7 @@ romberg <- function(f, a, b, n) {
     if (j == 1) 
       for(k in kArray) 
         if (k == 1) {
-          R[1, 1] <- trapezoid(f, a, b, FALSE)[[1]]
+          R[1, 1] <- trapezoid(f, a, b, 1, FALSE)[[1]]
         } else {
           i <- seq(1, 2^(k-2), by = 1)
           R[k, 1] <- 1/2 * (R[k-1, 1] + hArray[k-1] * sum(f(a + (2*i-1)*hArray[k])))  
