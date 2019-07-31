@@ -9,7 +9,7 @@ draw.trapezoid <- function(f, a, b, n = 1) {
     polygon(c(x[i:(i+1)], rev(x[i:(i+1)])), c(0, 0, rev(y[i:(i+1)])), col = '#d0fffe', border = 'blue')  
   }
   
-  curve(f, a, b, n = 101, add = TRUE, type = "l", col = "green") 
+  curve(f, a, b, n = 101, add = TRUE, type = "l", col = "green", main = "Trapecio") 
 }
   
 draw.simpson <- function(f, a, b, n = 1) {
@@ -28,7 +28,7 @@ draw.simpson <- function(f, a, b, n = 1) {
   Ly <- L(x)
   LyPolygon <- L(xPolygon)
   
-  plot(1, type = "n", xlab = "x", ylab = "y", xlim = c(a-0.5, b+0.5), ylim = c(0, trunc(f(b))+1))  
+  plot(1, type = "n", xlab = "x", ylab = "y", xlim = c(a-0.5, b+0.5), ylim = c(0, trunc(f(b))+1), main = "Simpson")  
   
   polygon(c(min(x), xPolygon, max(x)), c(0, LyPolygon, 0), col = "#1b98e0") 
   

@@ -10,7 +10,7 @@ euler <- function(f, a, b, n, y0) {
     y[i+1] <- y[i] + h * f(t[i], y[i])
   }
   
-  plot(t, y, type="b", lty = 10, lwd = 5, col = "blue", main = "Euler")
+  plot(t, y, type="b", lty = 1, lwd = 2, col = "blue", main = "Euler")
   
   result <- matrix(c(t, y), ncol = 2, byrow = FALSE)
   colnames(result) <- c('t', 'y')

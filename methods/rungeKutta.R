@@ -15,7 +15,7 @@ rungeKutta <- function(f, a, b, n, y0) {
     y[i] <- y[i-1] + 1/3 * (k1 + 2 * k2 + 2 * k3 + k4)
   }
   
-  plot(t, y, type="b", lty = 10, lwd = 5, col = "red", main = "Runge-Kutta")  
+  plot(t, y, type="b", lty = 1, lwd = 2, col = "red", main = "Runge-Kutta")  
   
   result <- matrix(c(t, y), ncol = 2, byrow = FALSE)
   colnames(result) <- c('t', 'y')
