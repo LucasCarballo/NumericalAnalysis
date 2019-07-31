@@ -7,19 +7,14 @@ taylor <- function(f, a, b, n, y0, m) {
   y[1] <- y0
   
   t <- seq(a, b, by = h)
-  
-  fdx <- rep(NA, m)
 
-  ft <- Deriv(f, "t")
-  fy <- Deriv(f, "y")
-
-  fdx <- list(paste(as.expression(body(ft)), " + ((", as.expression(body(fy)), ") * (", as.expression(body(f)), "))"))
+  fdx <- list(as.expression(body(f)))
   
-  for(i in 2:m) {
+  for (i in 2:m) {
     fdt <- Deriv(fdx[[i-1]], "t")
     fdy <- Deriv(fdx[[i-1]], "y")
     
-    fdx <- c(fdx, paste(fdt, " + ((", fdy, ") * (", as.expression(body(f)), "))"))
+    fdx <- c(fdx, paste(as.expression(fdt), " + ((", as.expression(fdy), ") * (", as.expression(body(f)), "))"))
   }
   
   for(i in 1:n) {
@@ -36,8 +31,7 @@ taylor <- function(f, a, b, n, y0, m) {
     y[i+1] <- y[i] + h * sum(seqH * fkdx)
   }
   
-  plot(t, y, type="b")
-  #curve(f, a, b, n = 101, add = TRUE, type = "l", col = "green") 
+  plot(t, y, type="b", lty = 10, lwd = 5, col = "green", main = "Taylor")
   
   result <- matrix(c(t, y), ncol = 2, byrow = FALSE)
   colnames(result) <- c('t', 'y')

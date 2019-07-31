@@ -4,20 +4,16 @@ euler <- function(f, a, b, n, y0) {
   y <- rep(NA, n)
   y[1] <- y0
   
-  x <- seq(a, b, by = h)
+  t <- seq(a, b, by = h)
   
   for(i in 1:n) {
-    y[i+1] <- y[i] + h * f(x[i], y[i])
+    y[i+1] <- y[i] + h * f(t[i], y[i])
   }
   
-  print(x)
-  print(y)
+  plot(t, y, type="b", lty = 10, lwd = 5, col = "blue", main = "Euler")
   
-  plot(x, y, type="b")
-  #curve(f, a, b, n = 101, add = TRUE, type = "l", col = "green") 
-  
-  result <- matrix(c(x, y), ncol = 2, byrow = FALSE)
-  colnames(result) <- c('x', 'y')
+  result <- matrix(c(t, y), ncol = 2, byrow = FALSE)
+  colnames(result) <- c('t', 'y')
   
   result
 }
